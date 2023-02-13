@@ -289,6 +289,7 @@ public class SwiftFlutterTtsPlugin: NSObject, FlutterPlugin, AVSpeechSynthesizer
   }
 
   private func stop() {
+    isStop = true
     self.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
   }
 
@@ -392,6 +393,7 @@ public class SwiftFlutterTtsPlugin: NSObject, FlutterPlugin, AVSpeechSynthesizer
   }
 
   public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+    isStop = false
     self.channel.invokeMethod("speak.onCancel", arguments: nil)
   }
 
